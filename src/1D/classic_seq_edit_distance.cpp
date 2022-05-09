@@ -80,27 +80,3 @@ void display(const vector<vector<int>> &m)
         cout << endl;
     }
 }
-
-void classic_seq_edit_distance(const string &a, const string &b, const block &bk, int **&scores)
-{
-    bound first_bound = bk.data.core_data.first_bound;
-    bound second_bound = bk.data.core_data.second_bound;
-
-    for (int i = (first_bound.begin == 0 ? 1 : first_bound.begin); i <= first_bound.end; ++i)
-    {
-        for (int j = (second_bound.begin == 0 ? 1 : second_bound.begin); j <= second_bound.end; ++j)
-        {
-            if (a[i - 1] == b[j - 1])
-            {
-                scores[i][j] = scores[i - 1][j - 1];
-                continue;
-            }
-
-            int x = scores[i - 1][j] + 1;     // Deletion
-            int y = scores[i][j - 1] + 1;     // Insertion
-            int z = scores[i - 1][j - 1] + 1; // Substitution
-
-            scores[i][j] = min({x, y, z});
-        }
-    }
-}

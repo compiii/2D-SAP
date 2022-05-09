@@ -1,6 +1,5 @@
 #include "common/handy_chrono.h"
 #include "2D/classic_seq_2d_sap.h"
-#include "2D/classic_mpi_2d_sap.h"
 #include "2D/classic_openmp_2d_sap.h"
 
 #include <fstream>
@@ -150,53 +149,20 @@ int main(int argc, char *argv[])
     }
     tmp_trans_x.clear();
     tmp_trans_y.clear();
-    /*cout << "trans string 1" << endl;
-    for (auto s : trans_x)
-    {
-        cout << s << endl;
-    }*/
-    /*for (int i = 0; i <= n1; ++i)
-    {
-        for (int j = 0; j < m1; ++j)
-        {
-            cout << trans_x[i][j];
-        }
-        cout << endl;
-    }*/
-
-    /*cout << "trans string 2" << endl;
-    for (auto s : trans_y)
-    {
-        cout << s << endl;
-    }*/
-    /*for (int i = 0; i <= n2; ++i)
-    {
-        for (int j = 0; j < m2; ++j)
-        {
-            cout << trans_y[i][j];
-        }
-        cout << endl;
-    }*/
 
     int score = 0;
     chrono_clock start, end;
     double total_duration = 0;
     double computation_time = 0;
-    // double communication_time = 0;
-    // double table_build_duration = 0;
-    // double pure_duration = 0;
     double idle_time = 0;
     double preprocessing_time = 0;
-    double pre_comm_time = 0;
-    double main_time = 0;
-    double main_comm_time = 0;
 
     if (rank == 0)
     {
         // Print sizes
         cout << "<< " << nb_str_1 << " x " << size_str_1 << endl;
         cout << "<< " << nb_str_2 << " x " << size_str_2 << endl;
-        cout << "<< " << max_process << " processors " << endl;
+        // cout << "<< " << max_process << " processors " << endl;
         cout << "<< " << omp_get_max_threads() << " threads " << endl;
 
         /*cout << "string 1" << endl;
@@ -232,7 +198,7 @@ int main(int argc, char *argv[])
              << "(" << preprocessing_time << "s + "
              << computation_time << "s)"
              << endl;
-        if constexpr (1)
+        /*if constexpr (1)
         {
             ofstream output;
             output.open("output/results.csv", ios::app);
@@ -241,49 +207,7 @@ int main(int argc, char *argv[])
                 output << algorithm << "," << 0 << "," << rank << "," << max_process << "," << nb_str_1 << "," << size_str_1 << "," << nb_str_2 << "," << size_str_2 << "," << total_duration << "," << 0 << "," << preprocessing_time << "," << 0 << "," << computation_time << "," << score << "," << std::endl;
                 output.close();
             }
-        }
-    }
-    if ((algorithm == 1 || run_all_algorithms))
-    {
-        MPI_Barrier(MPI_COMM_WORLD);
-        // MPI
-        total_duration = 0;
-        computation_time = 0;
-        idle_time = 0;
-        preprocessing_time = 0;
-        pre_comm_time = 0;
-        main_time = 0;
-        main_comm_time = 0;
-        start = now();
-        score = classic_mpi_2d_sap(str_1, str_2, trans_x, trans_y, rank, max_process, preprocessing_time, pre_comm_time, main_time, main_comm_time);
-        end = now();
-        total_duration = duration(start, end);
-        idle_time = total_duration - (preprocessing_time + main_time);
-        main_time += idle_time;
-        double pre_comp_time = preprocessing_time - pre_comm_time;
-        double main_comp_time = main_time - main_comm_time;
-
-        if (rank == (max_process - 1))
-        {
-            cout << ">> Classic MPI [" << score << "] "
-                 << total_duration << "s \t= "
-                 << "(" << pre_comp_time << "s + "
-                 << pre_comm_time << "s) + ("
-                 << main_comp_time << "s + "
-                 << main_comm_time << "s)"
-                 << endl;
-        }
-
-        if constexpr (1)
-        {
-            ofstream output;
-            output.open("output/results.csv", ios::app);
-            if (output)
-            {
-                output << algorithm << "," << 0 << "," << rank << "," << max_process << "," << nb_str_1 << "," << size_str_1 << "," << nb_str_2 << "," << size_str_2 << "," << total_duration << "," << pre_comm_time << "," << pre_comp_time << "," << main_comm_time << "," << main_comp_time << "," << score << "," << std::endl;
-                output.close();
-            }
-        }
+        }*/
     }
     if (rank == 0 && (algorithm == 2 || run_all_algorithms))
     {

@@ -304,21 +304,6 @@ int classic_openmp_2d_sap(const vector<string> &x, const vector<string> &y, cons
             }
         }
     }
-    /*for (int i = 0; i < m1; i++)
-    {
-        for (int j = 0; j <= n1; j++)
-        {
-            for (int k = 0; k < m2; k++)
-            {
-                for (int l = 0; l <= n2; l++)
-                {
-                    cout << T[i][j][k][l] << " ";
-                }
-                cout << endl;
-            }
-            cout << endl;
-        }
-    }*/
 
     for (int i = 1; i < m1; i++)
     {
