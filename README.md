@@ -1,2 +1,1 @@
-# 2d-sap
-Parallelization of the two-dimensional sequence alignment problem
+# Parallelization of two-dimension sequence alignment problem

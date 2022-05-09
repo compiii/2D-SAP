@@ -1,0 +1,6 @@
+input/dna/NC_002516.2/NC_002516.2.seq
+input/dna/random/dna.seq
+input/dna/random/small.seq
+input/dna/random/medium.seq
+input/dna/random/huge.seq
+input/protein/DIP-33449N/DIP-33449N.seq
