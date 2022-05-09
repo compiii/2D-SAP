@@ -1,1 +1,1 @@
-# Parallelization of two-dimension sequence alignment problem
+# Parallelization of the two-dimensional sequence alignment problem
